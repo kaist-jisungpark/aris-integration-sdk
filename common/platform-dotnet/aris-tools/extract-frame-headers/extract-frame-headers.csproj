@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>extract_frame_headers</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\..\submodules\aris-file-sdk\type-definitions\CSharp\FileHeader.cs" Link="FileHeader.cs" />
+    <Compile Include="..\..\..\..\submodules\aris-file-sdk\type-definitions\CSharp\FrameHeader.cs" Link="FrameHeader.cs" />
+  </ItemGroup>
+
+</Project>
