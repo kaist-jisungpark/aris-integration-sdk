@@ -6,6 +6,18 @@
     <RootNamespace>extract_frame_headers</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\..\..\..\submodules\aris-file-sdk\type-definitions\CSharp\FileHeader.cs" Link="FileHeader.cs" />
     <Compile Include="..\..\..\..\submodules\aris-file-sdk\type-definitions\CSharp\FrameHeader.cs" Link="FrameHeader.cs" />

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "extract-frame-headers": {
+      "commandName": "Project",
+      "commandLineArgs": "c:\\Users\\curt\\Downloads\\2018-12-27_132735_125cm.aris"
+    }
+  }
+}
