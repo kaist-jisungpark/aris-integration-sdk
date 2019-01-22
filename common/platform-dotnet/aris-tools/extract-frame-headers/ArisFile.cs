@@ -40,9 +40,9 @@ namespace extract_frame_headers
             }
         }
 
-        public void ExportCsv(TextWriter output)
+        public void ExportCsv(TextWriter output, string[] fieldsOfInterest)
         {
-            var fields = GetFieldInfos(new HashSet<string>()).ToArray();
+            var fields = GetFieldInfos(new HashSet<string>(fieldsOfInterest)).ToArray();
             ExportColumnHeaders(fields, output);
 
             for (int i = 0; i < int.MaxValue; ++i)

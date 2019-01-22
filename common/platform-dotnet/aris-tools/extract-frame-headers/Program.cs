@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace extract_frame_headers
 {
@@ -25,7 +27,7 @@ namespace extract_frame_headers
                     {
                         using (var api = arisFile)
                         {
-                            api.ExportCsv(Console.Out);
+                            api.ExportCsv(Console.Out, arguments.FieldsOfInterest);
                         }
                     }
                     else
@@ -53,6 +55,28 @@ namespace extract_frame_headers
             var showFieldNames = clArgs[0] == "--names";
             var filePath = clArgs[0];
             var fieldsOfInterest = new string[0];
+
+            if (!showFieldNames && clArgs.Length > 1)
+            {
+                fieldsOfInterest = clArgs.Skip(1).ToArray();
+
+                bool allGood = true;
+                var set = new HashSet<string>(ArisFile.GetOrderedFrameHeaderFieldNames());
+                foreach (var name in fieldsOfInterest)
+                {
+                    if (!set.Contains(name))
+                    {
+                        allGood = false;
+                        Console.Error.WriteLine($"Not a valid field name: '{name}'");
+                    }
+                }
+
+                if (!allGood)
+                {
+                    args = null;
+                    return false;
+                }
+            }
 
             args = new Arguments { ShowFieldNames = showFieldNames, FilePath = filePath, FieldsOfInterest = fieldsOfInterest };
             return true;
