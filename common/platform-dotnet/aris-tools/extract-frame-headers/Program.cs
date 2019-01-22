@@ -10,16 +10,28 @@ namespace extract_frame_headers
             Arguments arguments;
             if (ParseArguments(args, out arguments))
             {
-                if (ArisFile.Create(arguments.FilePath, out var arisFile))
+                if (arguments.ShowFieldNames)
                 {
-                    using (var api = arisFile)
+                    Console.WriteLine("Available field names:");
+
+                    foreach (var name in ArisFile.GetOrderedFrameHeaderFieldNames())
                     {
-                        api.ExportCsv(Console.Out);
+                        Console.WriteLine($"  {name}");
                     }
                 }
                 else
                 {
-                    Console.Error.WriteLine($"Couldn't process file '${arguments.FilePath}'");
+                    if (ArisFile.Create(arguments.FilePath, out var arisFile))
+                    {
+                        using (var api = arisFile)
+                        {
+                            api.ExportCsv(Console.Out);
+                        }
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine($"Couldn't process file '${arguments.FilePath}'");
+                    }
                 }
             }
             else
@@ -38,10 +50,11 @@ namespace extract_frame_headers
                 return false;
             }
 
+            var showFieldNames = clArgs[0] == "--names";
             var filePath = clArgs[0];
             var fieldsOfInterest = new string[0];
 
-            args = new Arguments { FilePath = filePath, FieldsOfInterest = fieldsOfInterest };
+            args = new Arguments { ShowFieldNames = showFieldNames, FilePath = filePath, FieldsOfInterest = fieldsOfInterest };
             return true;
         }
 
@@ -53,6 +66,7 @@ namespace extract_frame_headers
 
     internal class Arguments
     {
+        public bool ShowFieldNames;
         public string FilePath { get; set; }
         public string[] FieldsOfInterest { get; set; }
     }

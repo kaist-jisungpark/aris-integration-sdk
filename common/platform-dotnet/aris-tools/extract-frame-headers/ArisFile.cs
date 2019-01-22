@@ -251,7 +251,7 @@ namespace extract_frame_headers
             // Dispose non-managed resources
         }
 
-        private static IEnumerable<string> GetOrderedFrameHeaderFieldNames()
+        internal static IEnumerable<string> GetOrderedFrameHeaderFieldNames()
         {
             foreach (var f in typeof(ArisFrameHeader).GetFields().Where(f => !f.IsStatic && f.Name != "padding"))
             {
