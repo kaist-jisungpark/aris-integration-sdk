@@ -32,7 +32,7 @@ namespace extract_frame_headers
                     }
                     else
                     {
-                        Console.Error.WriteLine($"Couldn't process file '${arguments.FilePath}'");
+                        Console.Error.WriteLine($"Couldn't process file '{arguments.FilePath}'");
                     }
                 }
             }
